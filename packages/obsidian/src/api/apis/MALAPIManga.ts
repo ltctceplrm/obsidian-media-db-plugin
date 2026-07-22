@@ -23,7 +23,7 @@ export class MALAPIManga extends APIModel {
 		this.plugin = plugin;
 		this.apiName = 'MALAPI Manga';
 		this.apiDescription = 'A free API for Manga. Some results may take a long time to load.';
-		this.apiUrl = 'https://jikan.moe/';
+		this.apiUrl = 'https://tenrai.org/';
 		this.types = [MediaType.ComicManga];
 		this.typeMappings = new Map<string, string>();
 		this.typeMappings.set('manga', 'manga');
@@ -38,7 +38,7 @@ export class MALAPIManga extends APIModel {
 	async searchByTitle(title: string): Promise<Result<MediaTypeModel[], MDBError>> {
 		Logger.log(`MDB | api "${this.apiName}" queried by Title`);
 
-		const client = createClient<paths>({ baseUrl: 'https://api.jikan.moe/v4/' });
+		const client = createClient<paths>({ baseUrl: 'https://api.tenrai.org/v1/' });
 
 		const response = await client.GET('/manga', {
 			params: {
@@ -109,7 +109,7 @@ export class MALAPIManga extends APIModel {
 	async getById(id: string): Promise<Result<MediaTypeModel, MDBError>> {
 		Logger.log(`MDB | api "${this.apiName}" queried by ID`);
 
-		const client = createClient<paths>({ baseUrl: 'https://api.jikan.moe/v4/' });
+		const client = createClient<paths>({ baseUrl: 'https://api.tenrai.org/v1/' });
 
 		const response = await client.GET('/manga/{id}/full', {
 			params: {
