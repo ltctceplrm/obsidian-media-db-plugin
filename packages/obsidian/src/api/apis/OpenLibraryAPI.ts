@@ -9,7 +9,7 @@ import { MDBErrorKind, toMdbError } from 'packages/obsidian/src/utils/MDBError';
 import { MediaType } from 'packages/obsidian/src/utils/MediaType';
 import type { Result } from 'packages/obsidian/src/utils/result';
 import { err, fromPromise, ok } from 'packages/obsidian/src/utils/result';
-import { obsidianFetch } from 'packages/obsidian/src/utils/Utils';
+import { obsidianFetch, contactEmail, mediaDbVersion, pluginName } from 'packages/obsidian/src/utils/Utils';
 import type { paths } from 'packages/schemas/src/OpenLibrary';
 
 type OpenLibraryIdKind = 'book' | 'search';
@@ -72,7 +72,10 @@ export class OpenLibraryAPI extends APIModel {
 
 	private async fetchOpenLibraryJson<T>(url: string, context: Record<string, unknown>): Promise<Result<T, MDBError>> {
 		try {
-			const response = await obsidianFetch(new Request(`https://openlibrary.org${url}`));
+			const request = new Request(`https://openlibrary.org${url}`);
+			const headers = new Headers(request.headers);
+			headers.set('User-Agent', `${pluginName}/${mediaDbVersion} (${contactEmail})`);
+			const response = await obsidianFetch(new Request(request, { headers }));
 			if (!response.ok) {
 				return err({
 					kind: MDBErrorKind.Api,
@@ -97,10 +100,14 @@ export class OpenLibraryAPI extends APIModel {
 	private async searchByOlid(olid: string): Promise<Result<SearchResponse | undefined, MDBError>> {
 		const responseResult = await fromPromise(
 			this.client.GET('/search.json', {
+				headers: {
+					'User-Agent': `${pluginName}/${mediaDbVersion} (${contactEmail})`,
+				},
 				params: {
 					query: {
 						q: olid,
 						fields: 'key,title,author_name,author_key,first_publish_year,cover_i,subject,number_of_pages,number_of_pages_median,description,ratings_average,isbn',
+						limit: 20,
 					},
 				},
 				fetch: obsidianFetch,
@@ -135,10 +142,14 @@ export class OpenLibraryAPI extends APIModel {
 
 		const responseResult = await fromPromise(
 			this.client.GET('/search.json', {
+				headers: {
+					'User-Agent': `${pluginName}/${mediaDbVersion} (${contactEmail})`,
+				},
 				params: {
 					query: {
 						q: title,
 						fields: 'key,title,author_name,first_publish_year,cover_i,subject,number_of_pages,number_of_pages_median,description,ratings_average,isbn',
+						limit: 20,
 					},
 				},
 				fetch: obsidianFetch,
@@ -276,10 +287,14 @@ export class OpenLibraryAPI extends APIModel {
 	private async getBySearchQuery(query: string): Promise<Result<MediaTypeModel, MDBError>> {
 		const responseResult = await fromPromise(
 			this.client.GET('/search.json', {
+				headers: {
+					'User-Agent': `${pluginName}/${mediaDbVersion} (${contactEmail})`,
+				},
 				params: {
 					query: {
 						q: query,
 						fields: 'key,title,author_name,first_publish_year,cover_i,subject,number_of_pages,number_of_pages_median,description,ratings_average,isbn',
+						limit: 20,
 					},
 				},
 				fetch: obsidianFetch,
