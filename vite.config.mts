@@ -21,7 +21,7 @@ export default defineConfig(async ({ mode }) => {
 			targets: [
 				{
 					src: 'manifest.json',
-					dest: outDir,
+					dest: '.',
 				},
 			],
 		}),
@@ -50,13 +50,12 @@ export default defineConfig(async ({ mode }) => {
 			sourcemap: prod ? false : 'inline',
 			cssCodeSplit: false,
 			emptyOutDir: false,
-			outDir: '',
+			outDir: outDir,
 			rolldownOptions: {
 				input: {
 					main: path.resolve(__dirname, entryFile),
 				},
 				output: {
-					dir: outDir,
 					entryFileNames: 'main.js',
 					assetFileNames: 'styles.css',
 				},
