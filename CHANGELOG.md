@@ -1,6 +1,6 @@
 # Changelog
 
-# Unreleased
+# 0.9.0
 
 - Added support for the `VNDB` API [#165](https://github.com/mProjectsCode/obsidian-media-db-plugin/pull/165) (thanks Senyksia)
 - Added support for comic books through the `Comic Vine` API [#176](https://github.com/mProjectsCode/obsidian-media-db-plugin/pull/176) (thanks ltctceplrm)
@@ -23,6 +23,7 @@
 - Re-implemented `IGDB` and `RAWG` providers with improved type safety and conflict resolution [#239](https://github.com/mProjectsCode/obsidian-media-db-plugin/pull/239) (thanks m24ih)
 - Added support for Japanese titles in MyAnimeList [#253](https://github.com/mProjectsCode/obsidian-media-db-plugin/pull/253) (thanks ltctceplrm)
 - Migrated plugin secrets to Obsidian secret storage and added a prompt to copy and remove legacy plaintext API keys [#277](https://github.com/mProjectsCode/obsidian-media-db-plugin/pull/277) (thanks ltctceplrm)
+- Replaced Jikan with Tenrai and improved Open Library integration to reduce rate limiting [#281](https://github.com/mProjectsCode/obsidian-media-db-plugin/pull/281) (thanks ltctceplrm)
 - Migrated the settings UI to native Obsidian components
 - Temporarily disabled the MobyGames and Giant Bomb integrations
 - Fixed saved file name templates, folders, and custom date formats not being applied when the plugin starts
