@@ -43,7 +43,6 @@ function replaceTag(match: string, mediaTypeModel: MediaTypeModel, ignoreUndefin
 			return ignoreUndefined ? '' : '{{ INVALID TEMPLATE TAG - object undefined }}';
 		}
 
-		// eslint-disable-next-line @typescript-eslint/no-base-to-string
 		return obj?.toString() ?? 'null';
 	} else if (parts.length === 2) {
 		const operator = parts[0];
@@ -302,7 +301,6 @@ export async function obsidianFetch(input: Request): Promise<Response> {
 		ok: res.status >= 200 && res.status < 300,
 		status: res.status,
 		headers: responseHeaders,
-		// eslint-disable-next-line
 		json: async () => res.json,
 		text: async () => res.text,
 	} as Response;

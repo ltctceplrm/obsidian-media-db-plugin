@@ -19,7 +19,6 @@ export class Logger {
 
 	static log(...args: unknown[]): void {
 		if (logLevel >= LogLevel.LOG) {
-			// eslint-disable-next-line obsidianmd/rule-custom-message -- These log statements are disabled for production builds.
 			console.log(...args);
 		}
 	}

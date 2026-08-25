@@ -44,7 +44,7 @@ interface VNJSONResponse {
 				},
 			];
 			devstatus: VNDevStatus;
-			released: string | 'TBA' | null; // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
+			released: string | 'TBA' | null;
 			image: {
 				url: string;
 				sexual: number;

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
-
 import { requestUrl } from 'obsidian';
 import { APIModel } from 'packages/obsidian/src/api/APIModel';
 import type MediaDbPlugin from 'packages/obsidian/src/main';
